@@ -14,6 +14,7 @@ class CreateTableModules extends Migration
     public function up()
     {
         Schema::create('modules', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('key_name')->index();
             $table->string('key_type')->index();
