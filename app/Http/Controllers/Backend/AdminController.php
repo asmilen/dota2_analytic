@@ -45,7 +45,6 @@ class AdminController extends Controller
             $user = Socialite::driver('google')->user();
 
             $user = User::where('email', $user->email)->get();
-
             if ($user->count() > 0) {
                 session()->put('admin_login', $user->first());
                 return redirect('admin');
