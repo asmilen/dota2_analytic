@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
 use App\User;
+use App\Site;
 use Exception;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Image;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -52,6 +54,7 @@ class AdminController extends Controller
                 return redirect('admin/notice');
             }
         } catch (Exception $e) {
+            dd($e);
             flash('You do not have permission to access! : ', 'error');
             return redirect('admin/notice');
         }

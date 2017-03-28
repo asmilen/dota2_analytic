@@ -12,25 +12,24 @@
 */
 
 #Admin Routes
-Route::get('admin/login', 'AdminController@redirectToGoogle');
-Route::get('admin/logout', 'AdminController@logout');
-Route::get('admin/callback', 'AdminController@handleGoogleCallback');
-Route::get('admin/notice', 'AdminController@notice');
-Route::get('admin', 'AdminController@index');
-Route::post('admin/ajax', 'AdminController@ajax');
-Route::get('admin/export/{id}', 'ProjectsController@export');
+Route::get('admin/login', 'Backend\AdminController@redirectToGoogle');
+Route::get('admin/logout', 'Backend\AdminController@logout');
+Route::get('admin/callback', 'Backend\AdminController@handleGoogleCallback');
+Route::get('admin/notice', 'Backend\AdminController@notice');
+Route::get('admin', 'Backend\AdminController@index');
+Route::post('admin/ajax', 'Backend\AdminController@ajax');
 #Content Routes
 foreach (config('site.content') as $content => $config) {
-    Route::resource('admin/'.$content, ucfirst($content).'Controller');
+    Route::resource('admin/'.$content, 'Backend\\'.ucfirst($content).'Controller');
 }
-Route::resource('admin/modules', 'ModulesController');
+Route::resource('admin/modules', 'Backend\ModulesController');
 #Frontend Routes
-Route::get('login', 'AuthController@redirectToAuthServer');
-Route::get('logout', 'AuthController@logout');
-Route::get('callback', 'AuthController@callback');
-Route::get('logoutError','MainController@redirectToLogoutError');
+Route::get('login', 'Frontend\AuthController@redirectToAuthServer');
+Route::get('logout', 'Frontend\AuthController@logout');
+Route::get('callback', 'Frontend\AuthController@callback');
+Route::get('logoutError','Frontend\AuthController@redirectToLogoutError');
 
-Route::get('user', 'FrontendController@user');
+Route::get('user', 'Frontend\FrontendController@user');
 
 Route::get('/', function () {
     return view('welcome');
