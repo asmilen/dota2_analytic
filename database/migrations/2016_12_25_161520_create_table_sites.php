@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableAccounts extends Migration
+class CreateTableBetSites extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreateTableAccounts extends Migration
      */
     public function up()
     {
-        Schema::create('accounts', function (Blueprint $table) {
+        Schema::create('bet_sites', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('steam_id')->unique();
-            $table->string('username');
-            $table->string('email');
-            $table->string('avatar');
-            $table->string('client_ip');
-            $table->integer('point');
+            $table->string('name');
             $table->timestamps();
         });
 
@@ -33,6 +29,6 @@ class CreateTableAccounts extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('accounts');
+        Schema::dropIfExists('bet_sites');
     }
 }

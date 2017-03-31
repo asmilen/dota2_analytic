@@ -17,6 +17,7 @@ class CreateTableMatches extends Migration
         Schema::create('matches', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
+            $table->integer('parent_id')->default(0); // Id cua keo thuong, dung de nhom cac tran dau thanh 1 group
             $table->integer('team_a')->unsigned();
             $table->foreign('team_a')
                 ->references('id')
@@ -30,13 +31,9 @@ class CreateTableMatches extends Migration
                 ->onDelete('cascade');
 
             $table->dateTime('match_time'); //thoi gian bat dau tran dau
-
-            $table->float('rate_a', 5, 2);
-            $table->float('rate_b', 5, 2);
-
+            $table->integer('match_length'); //thoi gian cua tran dau
 
             $table->integer('result')->default(0); //id cua doi thang , = 0 neu hoa , = 1 neu ko co ket qua
-            $table->string('score',32); //id cua doi thang.
 
             $table->integer('league_id')->unsigned(); //id cua giai dau
             $table->foreign('league_id')
@@ -44,9 +41,6 @@ class CreateTableMatches extends Migration
                 ->on('leagues')
                 ->onDelete('cascade');
 
-            $table->integer('d2top_id');
-            $table->integer('d2vp_id');
-            $table->integer('d2lounge_id');
             $table->smallInteger('status')->default(0);  // trang thai cua tran dau
             $table->string('handicap_a', 32);
             $table->string('handicap_b', 32);

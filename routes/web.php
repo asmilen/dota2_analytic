@@ -30,6 +30,7 @@ Route::get('callback', 'Frontend\AuthController@callback');
 Route::get('logoutError','Frontend\AuthController@redirectToLogoutError');
 
 Route::get('user', 'Frontend\FrontendController@user');
+Route::get('test', 'Backend\AdminController@test');
 
 Route::get('/', function () {
     return view('welcome');

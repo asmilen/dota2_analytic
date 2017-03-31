@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\User;
 use App\Site;
+use App\SiteMatch;
 use Exception;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -23,6 +24,21 @@ class AdminController extends Controller
             'logout',
             'notice'
         ]]);
+    }
+
+    public function test()
+    {
+        $sites = SiteMatch::all();
+        foreach ($sites as $key=>$site)
+        {
+            if ($site->match_id == 0)
+            {
+                $site->match_id = $key + 1;
+                $site->save();
+            }
+
+        }
+        return 0;
     }
 
     public function notice()

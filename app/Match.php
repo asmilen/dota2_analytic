@@ -20,7 +20,6 @@ class Match extends Model
 
         'result',
         'league_id',
-        'd2top_id',
         'status',
 
         'handicap_a',
