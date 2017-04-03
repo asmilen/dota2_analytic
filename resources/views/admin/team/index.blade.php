@@ -35,7 +35,7 @@
                                     <td>{{ ($team->status) ? 'Active' : 'Inactive' }}</td>
                                     <td>
                                         <button id-attr="{{$team->id}}" class="btn btn-primary btn-sm edit-team" type="button">Edit</button>&nbsp;
-                                        {!! Form::open(['method' => 'DELETE', 'route' => ['admin.teams.destroy', $team->id]]) !!}
+                                        {!! Form::open(['method' => 'DELETE', 'route' => ['teams.destroy', $team->id]]) !!}
                                         <button type="submit" class="btn btn-danger btn-mini">Delete</button>
                                         {!! Form::close() !!}
                                     </td>

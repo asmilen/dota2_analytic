@@ -3,16 +3,20 @@
 namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Team;
-use App\Http\Requests\TeamRequest;
 
 class TeamsController extends AdminController
 {
+    public $model = 'teams';
+
+    public $validator = [
+        'name' => 'required',
+    ];
+
     public function index(Request $request)
     {
-        $teams = Team::latest()->paginate(config('constants.ADMIN_ITEM_PER_PAGE'));
+        $teams = Team::latest()->paginate(config('site.item_per_page'));
         return view('admin.team.index', compact('teams'));
     }
 
@@ -21,9 +25,16 @@ class TeamsController extends AdminController
         return view('admin.team.form');
     }
 
-    public function store(TeamRequest $request)
+    public function store(Request $request)
     {
-        
+        $validator = Validator::make($request->all(), $this->validator);
+
+        if ($validator->fails()) {
+            return redirect('admin/teams/create')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $data = $request->all();
 
         $data['status'] = ($request->input('status') == 'on') ? true : false;
@@ -52,8 +63,16 @@ class TeamsController extends AdminController
      * @param CategoryRequest $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update($id, TeamRequest $request)
+    public function update($id, Request $request)
     {
+        $validator = Validator::make($request->all(), $this->validator);
+
+        if ($validator->fails()) {
+            return redirect('admin/teams/create')
+                ->withErrors($validator)
+                ->withInput();
+        }
+        
         $team = Team::find($id);
         $data = $request->all();
 

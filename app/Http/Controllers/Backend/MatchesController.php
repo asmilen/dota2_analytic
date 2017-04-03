@@ -3,20 +3,16 @@
 namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-use Khill\Lavacharts\Lavacharts;
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Match;
-use App\Http\Requests\MatchRequest;
 
 class MatchesController extends AdminController
 {
     //
 
-    public function index()
+    public function index(Request $request)
     {   
-
-        $matches = Match::latest()->paginate(config('constants.ADMIN_ITEM_PER_PAGE'));
+        $matches = Match::latest()->paginate(config('site.item_per_page'));
         return view('admin.match.index', compact('matches'));
     }
 
@@ -31,7 +27,7 @@ class MatchesController extends AdminController
         return view('admin.match.form', compact('match'));
     }
     
-    public function store(MatchRequest $request)
+    public function store(Request $request)
     {
         $data = $request->all();
         $data['status'] = -1;

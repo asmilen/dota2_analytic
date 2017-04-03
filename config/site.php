@@ -22,6 +22,11 @@ return [
             'modules' => [
             ]
         ],
+        'betsites' => [
+            'name' => 'Bet Sites',
+            'modules' => [
+            ]
+        ],
     ],
     'item_per_page' => 10
 ];

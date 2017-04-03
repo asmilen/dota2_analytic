@@ -16,7 +16,7 @@ class LeaguesController extends AdminController
 
     public function index(Request $request)
     {
-        $leagues = League::latest()->paginate(config('constants.ADMIN_ITEM_PER_PAGE'));
+        $leagues = League::latest()->paginate(config('site.item_per_page'));
         return view('admin.league.index', compact('leagues'));
     }
 
@@ -64,9 +64,6 @@ class LeaguesController extends AdminController
      */
     public function update($id, Request $request)
     {
-        //unique validation.
-        $this->validator['email'] .= ',email,' . $id;
-
         $validator = Validator::make($request->all(), $this->validator);
 
         if ($validator->fails()) {

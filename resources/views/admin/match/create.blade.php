@@ -13,16 +13,16 @@
 
                 <h2>Add</h2>
 
-                {!! Form::model($match = new \App\Match , ['route' => ['admin.matches.store']]) !!}
+                {!! Form::model($match = new \App\Match , ['route' => ['matches.store']]) !!}
 
                 <div class="form-group">
                     {!! Form::label('team_a', 'Team A') !!} :
-                    {!! Form::select('team_a', array('' => 'Choose Team A') + \App\Team::lists('name','id')->all(), null, ['class' => 'form-control']) !!}
+                    {!! Form::select('team_a', array('' => 'Choose Team A') + \App\Team::orderBy('name')->pluck('name','id')->all(), null, ['class' => 'form-control']) !!}
                 </div>
 
                 <div class="form-group">
                     {!! Form::label('team_b', 'Team B') !!} :
-                    {!! Form::select('team_b', array('' => 'Choose Team B') + \App\Team::lists('name','id')->all(), null, ['class' => 'form-control']) !!}
+                    {!! Form::select('team_b', array('' => 'Choose Team B') + \App\Team::orderBy('name')->pluck('name','id')->all(), null, ['class' => 'form-control']) !!}
                 </div>
 
                 <div class="form-group">
@@ -32,19 +32,20 @@
 
                 <div class="form-group">
                     {!! Form::label('league_id', 'Giải đấu') !!} :
-                    {!! Form::select('league_id', array('' => 'Chọn giải đấu') + \App\League::lists('name','id')->all(), null, ['class' => 'form-control']) !!}
+                    {!! Form::select('league_id', array('' => 'Chọn giải đấu') + \App\League::latest()->pluck('name','id')->all(), null, ['class' => 'form-control']) !!}
                 </div>
 
-                <div class="form-group">
-                    {!! Form::label('d2top_id', 'Dota2top ID') !!}
-                    {!! Form::text('d2top_id', null, ['class' => 'form-control']) !!}
-                </div>
+                @foreach(\App\BetSite::all() as $bet_site)
+                    <div class="form-group">
+                        {!! Form::label($bet_site->id.'_normal_url', $bet_site->name .' Url') !!}
+                        {!! Form::text($bet_site->id.'_normal_url', null, ['class' => 'form-control']) !!}
+                    </div>
+                @endforeach
 
                 <div class="form-group">
                     {!! Form::label('rounds', 'Rounds') !!}
                     {!! Form::select('rounds', array('BO1' => 'BO1','BO2' => 'BO2','BO3' => 'BO3','BO5' => 'BO5','BO7' => 'BO7',), null, ['class' => 'form-control']) !!}
                 </div>
-                <input type="checkbox" name="normal" value="1"> Normal<br>
                 <input type="checkbox" name="handicap_a1" value="1"> Handicap A<br>
                 <input type="checkbox" name="handicap_b1" value="1"> Handicap B<br>
                 <input type="checkbox" name="fb" value="1"> First Blood<br>
@@ -80,6 +81,12 @@
                 timepicker:true,
                 format:'Y-m-d H:i:s'
             });
+
+            $('[type=checkbox]').click(function() {
+                console.log(this.checked);
+            });
         });
+
+
     </script>
 @endsection

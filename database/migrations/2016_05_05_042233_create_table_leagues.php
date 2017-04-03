@@ -16,6 +16,7 @@ class CreateTableLeagues extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('name', 32);
+            $table->string('full_name', 255);
             $table->text('desc');
             $table->string('image');
             $table->smallInteger('status'); // Trang thai cua giai dau

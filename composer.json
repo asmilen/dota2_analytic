@@ -10,6 +10,7 @@
         "barryvdh/laravel-ide-helper": "^2.2",
         "cviebrock/eloquent-sluggable": "^4.2",
         "doctrine/dbal": "^2.5",
+        "guzzlehttp/guzzle": "^6.2",
         "intervention/image": "^2.3",
         "intervention/imagecache": "^2.3",
         "laracasts/flash": "^2.0",

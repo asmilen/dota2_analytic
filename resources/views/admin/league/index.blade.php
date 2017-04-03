@@ -35,7 +35,7 @@
                                     <td>{{ ($league->status) ? 'Active' : 'Inactive' }}</td>
                                     <td>
                                         <button id-attr="{{$league->id}}" class="btn btn-primary btn-sm edit-league" type="button">Edit</button>&nbsp;
-                                        {!! Form::open(['method' => 'DELETE', 'route' => ['admin.leagues.destroy', $league->id]]) !!}
+                                        {!! Form::open(['method' => 'DELETE', 'route' => ['leagues.destroy', $league->id]]) !!}
                                         <button type="submit" class="btn btn-danger btn-mini">Delete</button>
                                         {!! Form::close() !!}
                                     </td>
@@ -67,7 +67,7 @@
     <script>
         $(function(){
             $('.add-league').click(function(){
-                window.location.href = '/leagues/create';
+                window.location.href = 'leagues/create';
             });
             $('.edit-league').click(function(){
                 window.location.href = 'leagues/' + $(this).attr('id-attr') + '/edit';

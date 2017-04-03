@@ -14,7 +14,8 @@ class League extends Model
         'name',
         'desc',
         'image',
-        'status'
+        'status',
+        'full_name'
     ];
 
     protected $dates = ['created_at', 'updated_at'];
